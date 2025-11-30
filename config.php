@@ -4,15 +4,16 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Database configuration
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'college_website');
-define('DB_USER', 'root'); 
-define('DB_PASS', '');     
+// Railway MySQL Database Configuration
+define('DB_HOST', 'caboose.proxy.rlwy.net');
+define('DB_PORT', '18837');
+define('DB_NAME', 'railway');
+define('DB_USER', 'root');
+define('DB_PASS', 'PZWLRTDuiugQGaJdOSVOpixtmiiOcRbZ');
 
 try {
     $pdo = new PDO(
-        "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+        "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4",
         DB_USER,
         DB_PASS,
         [
@@ -22,9 +23,10 @@ try {
         ]
     );
 
-    // Strict SQL mode for better data safety
-    $pdo->exec("SET sql_mode='STRICT_ALL_TABLES'");
+    // Optional strict mode
+    // $pdo->exec("SET sql_mode='STRICT_ALL_TABLES'");
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
 ?>
+
