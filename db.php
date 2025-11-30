@@ -5,9 +5,11 @@ $user = "root";
 $pass = "PZWLRTDuiugQGaJdOSVOpixtmiiOcRbZ";
 $db = "railway";
 
-$conn = mysqli_connect($host, $user, $pass, $db, $port);
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+try {
+    $conn = new PDO("mysql:host=$host;port=$port;dbname=$db;charset=utf8", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // echo "DB Connected!";
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
 }
 ?>
